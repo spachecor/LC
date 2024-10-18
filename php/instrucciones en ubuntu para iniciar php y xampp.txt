@@ -1,0 +1,13 @@
+1º Descargamos de la pg oficial el instalador para linux de xampp
+2º Desde cmd nos vamos a descargas y ejecutamos chmod 755 xampp-linux-*-installer.run
+3º desde cmd ejecutamos ./xampp-linux-*-installer.run
+4º Ahora se nos abrirá el instalador y lo instalamos. 
+5º Una vez instalado, activamos los servicios y vamos desde el navegador a localhost y ahí tendremos nuestro servidor
+6º Para ejecutar xampp una vez cerrado, usamos sudo /opt/lampp/manager-linux-x64.run y lo ejecuta
+
+Ahora vamos a ver como ejecutar cosas en nuestro servidor
+1º Tenemos que dar permisos a nuestro usuario para que pueda modificar cosas en /opt/lampp/htdocs, para ello
+	usamos sudo chown -R selene:selene /opt/lampp/htdocs/ y después usamos sudo chmod -R 755 /opt/lampp/htdocs/
+2º Ahora podemos crear y modificar archivos dentro, y podremos también abrir la carpeta htdocs con vscode y ejecutar 
+	proyectos en nuestro servidor dentro de htdocs
+
