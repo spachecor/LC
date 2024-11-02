@@ -1,0 +1,72 @@
+[
+    {
+        "id": 1,
+        "nombre": "Juan",
+        "email": "juando90@gmail.com"
+    },
+    {
+        "id": 2,
+        "nombre": "Selene",
+        "email": "spachecor03@gmail.com"
+    },
+    {
+        "id": 3,
+        "nombre": "Ana",
+        "email": "ana@example.com"
+    },
+    {
+        "id": 4,
+        "nombre": "Luis",
+        "email": "luis@example.es"
+    },
+    {
+        "id": 5,
+        "nombre": "JJ",
+        "email": "jj@gmail.com"
+    },
+    {
+        "id": 6,
+        "nombre": "Anabel",
+        "email": "anabel@gmail.com"
+    },
+    {
+        "id": 7,
+        "nombre": "Manuel",
+        "email": "manuel@gmail.com"
+    },
+    {
+        "id": 8,
+        "nombre": "Gema",
+        "email": "gema@gmail.com"
+    },
+    {
+        "id": 9,
+        "nombre": "Carlos",
+        "email": "carlos@gmail.com"
+    },
+    {
+        "id": 10,
+        "nombre": "Patricia",
+        "email": "patri@gmail.com"
+    },
+    {
+        "id": 11,
+        "nombre": "Mateo",
+        "email": "mateo@gmail.com"
+    },
+    {
+        "id": 12,
+        "nombre": "Jose Mar\u00eda",
+        "email": "josemari@gmail.com"
+    },
+    {
+        "id": 13,
+        "nombre": "Sof\u00eda",
+        "email": "sofia@gmail.com"
+    },
+    {
+        "id": 14,
+        "nombre": "Fernando",
+        "email": "fernando@gmail.com"
+    }
+]

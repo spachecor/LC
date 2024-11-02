@@ -1,0 +1,27 @@
+.form-floating {
+    position: relative;
+}
+
+.form-floating label {
+    font-size: 2rem;
+    transition: all 0.2s ease;
+    top: 0.6rem;
+}
+
+.form-floating .form-control {
+    height: 5.5rem;
+    font-size: 1.5rem;
+    padding: 2rem 1rem;
+}
+
+.form-floating .form-control:focus ~ label,
+.form-floating .form-control:not(:placeholder-shown) ~ label {
+    top: -1rem;
+    left: 1rem;
+    font-size: 1rem;
+    color: #6c757d;
+}
+.subtitle {
+    font-size: 2em;
+    color: #666;
+}
