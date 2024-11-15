@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario</title>
+</head>
+<body>
+    <form id="miFormulario" method="post" action="insertar.php">
+        <p>
+            <input type="text" name="cod" placeholder="Escribe el código" autofocus>
+        </p>
+        <p>
+            <input type="text" name="nombre" placeholder="Nombre">
+        </p>   
+        <p>
+            <input type="text" name="nombre_corto" placeholder="Nombre Corto">
+        </p> 
+        <p>
+            <input type="text" name="descripcion" placeholder="Descripcion">
+        </p>  
+        <p>
+            <input type="text" name="pvp" placeholder="PVP, ejemplo 270.00">
+        </p> 
+        <p>
+            <select name="familia">
+                <option value="CAMARA">Cámara</option>
+                <option value="CONSOL">Consolas</option>
+                <option value="EBOOK">Libros electrónicos</option>
+                <option value="IMPRES">Impresoras</option>
+                <option value="MEMFLA">Memorias Flash</option>
+                <option value="MP3">Reproductores MP3</option>
+                <option value="MULTIF">Equipos Multifunción</option>
+                <option value="NETBOK">Netbooks</option>
+                <option value="ORDENA">Ordenadores</option>
+                <option value="PORTAT">Ordenadores portátiles</option>
+                <option value="ROUTER">Routers</option>
+                <option value="SOFTWA">Software</option>
+                <option value="TV">Televisores</option>
+                <option value="VIDEOC">Videocámaras</option>
+            </select>
+        </p>                                      
+        <p>
+            <input type="submit" value="Insertar">
+        </p>
+    </form>
+    
+</body>
+</html>
