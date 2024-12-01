@@ -1,46 +1,75 @@
 <?php
-class Producto {
-    private $referencia;
-    private $nombre;
-    private $descripcion;
-    private $precio;
-    private $descuento;
+class Producto implements Entity{
+    private string $id;
+    private string $nombre;
+    private string $descripcion;
+    private float $precio;
+    private int $descuento;
 
-    public function __construct($referencia, $nombre, $descripcion, $precio, $descuento) {
-        $this->referencia = $referencia;
+    public function __construct($id, $nombre, $descripcion, $precio, $descuento) {
+        $this->id = $id;
         $this->nombre = $nombre;
         $this->descripcion = $descripcion;
         $this->precio = $precio;
         $this->descuento = $descuento;
     }
-    public function getReferencia() {
-        return $this->referencia;
+    public static function fromArray(array $data): self {
+        return new self(
+            $data['id'],
+            $data['nombre'],
+            $data['descripcion'],
+            (float) $data['precio'],
+            (int) $data['descuento']
+        );
     }
-    public function setReferencia($referencia) {
-        $this->referencia = $referencia;
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->id,
+            'nombre' => $this->nombre,
+            'descripcion' => $this->descripcion,
+            'precio' => $this->precio,
+            'descuento' => $this->descuento
+        ];
     }
-    public function getNombre() {
+    public function getId(): string
+    {
+        return $this->id;
+    }
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
+    public function getNombre(): string
+    {
         return $this->nombre;
     }
-    public function setNombre($nombre) {
+    public function setNombre($nombre): void
+    {
         $this->nombre = $nombre;
     }
-    public function getDescripcion() {
+    public function getDescripcion(): string
+    {
         return $this->descripcion;
     }
-    public function setDescripcion($descripcion) {
+    public function setDescripcion($descripcion): void
+    {
         $this->descripcion = $descripcion;
     }
-    public function getPrecio() {
+    public function getPrecio(): float
+    {
         return $this->precio;
     }
-    public function setPrecio($precio) {
+    public function setPrecio($precio): void
+    {
         $this->precio = $precio;
     }
-    public function getDescuento() {
+    public function getDescuento(): int
+    {
         return $this->descuento;
     }
-    public function setDescuento($descuento) {
+    public function setDescuento($descuento): void
+    {
         $this->descuento = $descuento;
     }
 }
