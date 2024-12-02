@@ -1,13 +1,21 @@
 <?php
-class Connection {
-    private $host;
-    private $db;
-    private $user;
-    private $pass;
-    private $dns;
-    private $connection;
 
-    function __construct() {
+/**
+ * Clase Connection, que define como se realiza la conexión con la base de datos y las funciones necesarias para el
+ * funcionamiendo de la conexión.
+ * @author Selene
+ * @version 1.0
+ */
+class Connection {
+    private string $host;
+    private string $db;
+    private string $user;
+    private string $pass;
+    private string $dns;
+    private ?PDO $connection;
+
+    function __construct()
+    {
         $this->host = "localhost";
         $this->db = "ventas_comerciales";
         $this->user = "dam";
@@ -17,10 +25,21 @@ class Connection {
         //ponemos el modo en el que nos podrá lanzar excepciones
         $this->connection->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
     }
-    function __destruct() {
+
+    /**
+     * Functión que se encarga de destruir la conexión cuando ésta ya no sea necesaria
+     */
+    function __destruct()
+    {
         $this->connection = null;
     }
-    function getConnection() {
+
+    /**
+     * Función que nos devuelve el objeto PDO que permite la conexión
+     * @return PDO El objeto PDO que permite la conexión
+     */
+    function getConnection(): PDO
+    {
         return $this->connection;
     }
 }

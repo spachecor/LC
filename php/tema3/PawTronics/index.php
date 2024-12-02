@@ -8,19 +8,15 @@
 <body>
 <?php
 require_once ("db/Connection.php");
-require_once ("db/Repository.php");
-require_once ("db/ProductoRepository.php");
+require_once ("db/repository/Repository.php");
+require_once ("db/repository/ProductoRepository.php");
+require_once ("db/repository/ComercialRepository.php");
+require_once ("db/repository/VentaRepository.php");
 require_once ("models/Entity.php");
 require_once ("models/Producto.php");
-$connection = (new Connection())->getConnection();
-
-//hacemos las consultas
-$resultadoComerciales = $connection->query('select nombre from comerciales');
-$resultadoComerciales->bindColumn(1, $nombre);
-while($registro = $resultadoComerciales->fetch(PDO::FETCH_OBJ)){
-    echo $nombre."</br>";
-}
-
+require_once ("models/Comercial.php");
+require_once ("models/Venta.php");
+require_once ("util/DateTimeService.php");
 //hacemos insercion con repository
 $productoRepository = new ProductoRepository();
 //$productoRepository->insert(new Producto("ffecsaf", "Sujetador", "Normativo", 63.99, 0));
@@ -41,8 +37,20 @@ $resultadoProductos = $productoRepository->findAll();
 foreach($resultadoProductos as $producto){
     echo $producto->getNombre()."</br>";
 }
+echo "</br>";
+$comercialRepository = new ComercialRepository();
+$resultadoComerciales = $comercialRepository->findAll();
+foreach($resultadoComerciales as $comercial){
+    echo $comercial->getNombre()." ".DateTimeService::toStringFromDateTime($comercial->getFNacimiento())."</br>";
+}
 
+echo "</br>";
 
+$ventaRepository = new VentaRepository();
+$resultadoVentas = $ventaRepository->findAll();
+foreach($resultadoVentas as $venta){
+    echo $venta->getCantidad()."</br>";
+}
 ?>
 </body>
 </html>

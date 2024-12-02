@@ -1,20 +1,30 @@
 <?php
-class Producto implements Entity{
-    private string $id;
+
+/**
+ * Clase Producto, que modela como será la entidad Producto y su comportamiento
+ * @author Selene
+ * @version 1.0
+ */
+class Producto implements Entity
+{
+    private mixed $id;
     private string $nombre;
     private string $descripcion;
     private float $precio;
     private int $descuento;
 
-    public function __construct($id, $nombre, $descripcion, $precio, $descuento) {
+    public function __construct($id, $nombre, $descripcion, $precio, $descuento)
+    {
         $this->id = $id;
         $this->nombre = $nombre;
         $this->descripcion = $descripcion;
         $this->precio = $precio;
         $this->descuento = $descuento;
     }
-    public static function fromArray(array $data): self {
-        return new self(
+    public static function fromArray(array $data): self
+    {
+        return new self
+        (
             $data['id'],
             $data['nombre'],
             $data['descripcion'],
@@ -24,7 +34,8 @@ class Producto implements Entity{
     }
     public function toArray(): array
     {
-        return [
+        return
+            [
             'id' => $this->id,
             'nombre' => $this->nombre,
             'descripcion' => $this->descripcion,
@@ -32,11 +43,11 @@ class Producto implements Entity{
             'descuento' => $this->descuento
         ];
     }
-    public function getId(): string
+    public function getId(): mixed
     {
         return $this->id;
     }
-    public function setId($id): void
+    public function setId(mixed $id): void
     {
         $this->id = $id;
     }
