@@ -1,7 +1,10 @@
 <?php
+require_once "db/Connection.php";
+require_once "models/Entity.php";
 
 /**
- * Clase VentaRepository que desciende del Repository. Se encarga de gestionar el Repositorio de la Entidad Venta
+ * Clase VentaRepository que desciende del Repository. Se encarga de gestionar el Repositorio de la Entidad Venta.
+ * Sobreescribe varios métodos del Repository porque Venta necesita varios retoques más que otras entidades.
  * @see Repository
  * @see Venta
  * @author Selene
@@ -23,5 +26,105 @@ class VentaRepository extends Repository
     {
         return Venta::fromArray($row);
     }
-    //TODO sobreescribir todos los metodos que usen el id para que funcionen
+    public function findAll(): array
+    {
+        $connectionObject = new Connection();
+        $connection = $connectionObject->getConnection();
+        $statement = $connection->query(
+            "select c.id as comercial_id, c.nombre as comercial_nombre, c.salario as comercial_salario,
+            c.hijos as comercial_hijos, c.fNacimiento as comercial_fNacimiento, p.id as producto_id, 
+            p.nombre as producto_nombre, p.descripcion as producto_descripcion, p.precio as producto_precio, 
+            p.descuento as producto_descuento, v.cantidad, v.fecha
+            from comerciales c
+            inner join $this->table v
+            on c.id = v.codComercial
+            inner join productos p
+            on p.id = v.refProducto;"
+        );
+        $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $entities = [];
+        $entityClass = $this->getEntityClass();
+        foreach ($results as $row)
+        {
+            $entities[] = $entityClass::fromArray($row);
+        }
+        $connectionObject->__destruct();
+        return $entities;
+    }
+    public function findById(mixed $id): ?Entity
+    {
+        $connectionObject = new Connection();
+        $connection = $connectionObject->getConnection();
+        $query = "select c.id as comercial_id, c.nombre as comercial_nombre, c.salario as comercial_salario, 
+                    c.hijos as comercial_hijos, c.fNacimiento as comercial_fNacimiento, p.id as producto_id, 
+                    p.nombre as producto_nombre, p.descripcion as producto_descripcion, p.precio as producto_precio, 
+                    p.descuento as producto_descuento, v.cantidad, v.fecha
+                    from comerciales c 
+                        inner join $this->table v 
+                            on c.id = v.codComercial 
+                        inner join productos p 
+                            on p.id = v.refProducto 
+                    where c.id = :codComercial and p.id = :refProducto and fecha = :fecha";
+        $statement = $connection->prepare($query);
+        $statement->bindParam(":codComercial", $id['codComercial']);
+        $statement->bindParam(":refProducto", $id['refProducto']);
+        $statement->bindParam(":fecha", $id['fecha']);
+        $statement->execute();
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        $connectionObject->__destruct();
+        if($result) return $this->mapRowToEntity($result);
+        return null;
+    }
+    public function insert(Entity $entity): bool
+    {
+        return $this->makeTransaction(function($connection) use ($entity){
+            //creamos sql
+            $query = "insert into $this->table (codComercial, refProducto, cantidad, fecha) 
+                        values (:codComercial, :refProducto, :cantidad, :fecha)";
+            //preparamos, asignamos valores y ejecutamos la consulta
+            $statement = $connection->prepare($query);
+            $statement->bindParam(":codComercial", $entity->getId()['codComercial']);
+            $statement->bindParam(":refProducto", $entity->getId()['refProducto']);
+            $cantidad = $entity->getCantidad();
+            $statement->bindParam(":cantidad", $cantidad);
+            $fecha = DateTimeService::toStringFromDateTime($entity->getFecha());
+            $statement->bindParam(":fecha", $fecha);
+            //ejecutamos la query preparada
+            $statement->execute();
+        });
+    }
+    function update(mixed $id, Entity $entity): bool
+    {
+        return $this->makeTransaction(function($connection) use ($id, $entity)
+        {
+            //convertimos el objeto entrante en array
+            $data = $entity->toArray();
+            //creamos la query
+            $query = "update $this->table 
+                        set codComercial = :codComercial, refProducto = :refProducto, cantidad = :cantidad, fecha = :fecha 
+                        where codComercial = :codComercialPK and refProducto = :refProductoPK and fecha = :fechaPK";
+            $statement = $connection->prepare($query);
+            $statement->bindParam(":codComercial", $data['comercial']['id']);
+            $statement->bindParam(":refProducto", $data['producto']['id']);
+            $statement->bindParam(":cantidad", $data['cantidad']);
+            $statement->bindParam(":fecha", $data['fecha']);
+            $statement->bindValue(":codComercialPK", $id['codComercial']);
+            $statement->bindValue(":refProductoPK", $id['refProducto']);
+            $statement->bindValue(":fechaPK", $id['fecha']);
+            $statement->execute();
+        });
+    }
+    function delete($id): bool
+    {
+        return $this->makeTransaction(function($connection) use ($id)
+        {
+            $query = "delete from $this->table 
+                        where codComercial = :codComercial and refProducto = :refProducto and fecha = :fecha";
+            $statement = $connection->prepare($query);
+            $statement->bindValue(":codComercial", $id['codComercial']);
+            $statement->bindValue(":refProducto", $id['refProducto']);
+            $statement->bindValue(":fecha", $id['fecha']);
+            $statement->execute();
+        });
+    }
 }

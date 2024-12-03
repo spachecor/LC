@@ -14,7 +14,11 @@ class Venta implements Entity
     private DateTime $fecha;
     public function __construct(Comercial $comercial, Producto $producto, int $cantidad, DateTime $fecha)
     {
-        $this->id = [$comercial->getId(), $producto->getId(), DateTimeService::toDateTimeFromString($fecha)];
+        $this->id = [
+            "codComercial" =>$comercial->getId(),
+            "refProducto" => $producto->getId(),
+            "fecha" => DateTimeService::toStringFromDateTime($fecha)
+        ];
         $this->comercial = $comercial;
         $this->producto = $producto;
         $this->cantidad = $cantidad;
@@ -31,25 +35,25 @@ class Venta implements Entity
         $this->id = $id;
     }
 
-    public static function fromArray(array $data): Entity
+    public static function fromArray(array $data): self
     {
         return new self(
             new Comercial(
-                $data['comercial']['id'],
-                $data['comercial']['nombre'],
-                $data['comercial']['salario'],
-                $data['comercial']['hijos'],
-                $data['comercial']['fNacimiento']
+                $data['comercial_id'],
+                $data['comercial_nombre'],
+                $data['comercial_salario'],
+                $data['comercial_hijos'],
+                $data['comercial_fNacimiento']
             ),
             new Producto(
-                $data['producto']['id'],
-                $data['producto']['nombre'],
-                $data['producto']['descripcion'],
-                $data['producto']['precio'],
-                $data['producto']['descuento']
+                $data['producto_id'],
+                $data['producto_nombre'],
+                $data['producto_descripcion'],
+                $data['producto_precio'],
+                $data['producto_descuento']
             ),
             $data['cantidad'],
-            new DateTime($data['fecha'])
+            DateTimeService::toDateTimeFromString($data['fecha'])
         );
     }
     public function toArray(): array
@@ -59,7 +63,7 @@ class Venta implements Entity
             'comercial' => $this->comercial->toArray(),
             'producto' => $this->producto->toArray(),
             'cantidad' => $this->cantidad,
-            'fecha' => $this->fecha
+            'fecha' => DateTimeService::toStringFromDateTime($this->fecha)
         ];
     }
 

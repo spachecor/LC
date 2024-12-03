@@ -23,7 +23,7 @@ class Comercial implements Entity
             ? DateTimeService::toDateTimeFromString($fNacimiento)
             : $fNacimiento;
     }
-    public static function fromArray(array $data): Entity
+    public static function fromArray(array $data): self
     {
         return new self(
             $data['id'],
@@ -40,7 +40,7 @@ class Comercial implements Entity
             'nombre' => $this->nombre,
             'salario' => $this->salario,
             'hijos' => $this->hijos,
-            'fNacimiento' => $this->fNacimiento
+            'fNacimiento' => DateTimeService::toStringFromDateTime($this->fNacimiento)
         ];
     }
     public function getId(): mixed

@@ -25,6 +25,8 @@ create table if not exists Ventas (
     cantidad		int,
     fecha			datetime,
     primary key (codComercial, refProducto, fecha),
-    foreign key (codComercial) references Comerciales(id),
-    foreign key (refProducto) references Productos(id)
+    foreign key (codComercial) references Comerciales(id) on delete cascade on update cascade,
+    foreign key (refProducto) references Productos(id) on delete cascade on update cascade
 );
+
+insert into ventas values ('999','PC0001', 8, '2024-12-03 11:18:00');

@@ -67,16 +67,12 @@ abstract class Repository
     {
         $connectionObject = new Connection();
         $connection = $connectionObject->getConnection();
-        $statement = $connection->query("SELECT * FROM $this->tableName");
+        $statement = $connection->query("select * from $this->tableName");
         $results = $statement->fetchAll(PDO::FETCH_ASSOC);
         $entities = [];
         $entityClass = $this->getEntityClass();
         foreach ($results as $row)
         {
-            foreach ($row as $key => $value){
-                echo $key.": ".$value."<br>";
-                //TODO AQUI ESTA EL FALLO A LA HORA DE CONVERTIR LAS VENTAS EN OBJETOS VENTA, REVISAR
-            }
             $entities[] = $entityClass::fromArray($row);
         }
         $connectionObject->__destruct();
@@ -92,7 +88,7 @@ abstract class Repository
     {
         $connectionObject = new Connection();
         $connection = $connectionObject->getConnection();
-        $query = "SELECT * FROM $this->tableName WHERE id = :id";
+        $query = "select * from $this->tableName where id = :id";
         $statement = $connection->prepare($query);
         $statement->bindParam(":id", $id);
         $statement->execute();
@@ -118,7 +114,7 @@ abstract class Repository
             //usamos una función flecha para asignar : delante de cada valor
             $values = implode(", ", array_map(fn($col) => ":$col", array_keys($data)));
             //creamos sql
-            $query = "INSERT INTO $this->tableName ($columns) VALUES ($values)";
+            $query = "insert into $this->tableName ($columns) values ($values)";
             //preparamos, asignamos valores y ejecutamos la consulta
             $statement = $connection->prepare($query);
             foreach ($data as $column => $value)
@@ -135,22 +131,22 @@ abstract class Repository
      * @param Entity $entity La entidad a modificar
      * @return bool Devuelve true si la modificación se realizó con éxito y false si no se realizó con éxito
      */
-    function update(Entity $entity): bool
+    function update(mixed $id, Entity $entity): bool
     {
-        return $this->makeTransaction(function($connection) use ($entity)
+        return $this->makeTransaction(function($connection) use ($id, $entity)
         {
             //convertimos el objeto entrante en array
             $data = $entity->toArray();
             //construimos la asignación de los nuevos valores
             $newValues = implode(", ", array_map(fn($col) => "$col = :$col", array_keys($data)));
             //creamos la query
-            $query = "UPDATE $this->tableName SET $newValues WHERE id = :id";
+            $query = "update $this->tableName set $newValues where id = :id";
             $statement = $connection->prepare($query);
             foreach ($data as $column => $value)
             {
                 $statement->bindValue(":$column", $value);
             }
-            $statement->bindValue(":id", $entity->getId());
+            $statement->bindValue(":id", $id);
             $statement->execute();
         });
     }
@@ -165,7 +161,7 @@ abstract class Repository
     {
         return $this->makeTransaction(function($connection) use ($id)
         {
-            $query = "DELETE FROM $this->tableName WHERE id = :id";
+            $query = "delete from $this->tableName where id = :id";
             $statement = $connection->prepare($query);
             $statement->bindValue(":id", $id);
             $statement->execute();
