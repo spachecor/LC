@@ -1,6 +1,15 @@
 <?php
-require_once "db/Connection.php";
-require_once "models/Entity.php";
+
+namespace repository;
+
+use models\Entity;
+use models\Venta;
+use PDO;
+use services\Connection;
+use services\DateTimeService;
+
+require_once "src/services/Connection.php";
+require_once "src/models/Entity.php";
 
 /**
  * Clase VentaRepository que desciende del Repository. Se encarga de gestionar el Repositorio de la Entidad Venta.
@@ -13,10 +22,12 @@ require_once "models/Entity.php";
 class VentaRepository extends Repository
 {
     protected string $table = "ventas";
+
     public function __construct()
     {
         parent::__construct($this->table);
     }
+
     protected function getEntityClass(): string
     {
         return Venta::class;
@@ -26,6 +37,7 @@ class VentaRepository extends Repository
     {
         return Venta::fromArray($row);
     }
+
     public function findAll(): array
     {
         $connectionObject = new Connection();
@@ -44,13 +56,13 @@ class VentaRepository extends Repository
         $results = $statement->fetchAll(PDO::FETCH_ASSOC);
         $entities = [];
         $entityClass = $this->getEntityClass();
-        foreach ($results as $row)
-        {
+        foreach ($results as $row) {
             $entities[] = $entityClass::fromArray($row);
         }
         $connectionObject->__destruct();
         return $entities;
     }
+
     public function findById(mixed $id): ?Entity
     {
         $connectionObject = new Connection();
@@ -72,12 +84,13 @@ class VentaRepository extends Repository
         $statement->execute();
         $result = $statement->fetch(PDO::FETCH_ASSOC);
         $connectionObject->__destruct();
-        if($result) return $this->mapRowToEntity($result);
+        if ($result) return $this->mapRowToEntity($result);
         return null;
     }
+
     public function insert(Entity $entity): bool
     {
-        return $this->makeTransaction(function($connection) use ($entity){
+        return $this->makeTransaction(function ($connection) use ($entity) {
             //creamos sql
             $query = "insert into $this->table (codComercial, refProducto, cantidad, fecha) 
                         values (:codComercial, :refProducto, :cantidad, :fecha)";
@@ -93,10 +106,10 @@ class VentaRepository extends Repository
             $statement->execute();
         });
     }
+
     function update(mixed $id, Entity $entity): bool
     {
-        return $this->makeTransaction(function($connection) use ($id, $entity)
-        {
+        return $this->makeTransaction(function ($connection) use ($id, $entity) {
             //convertimos el objeto entrante en array
             $data = $entity->toArray();
             //creamos la query
@@ -114,10 +127,10 @@ class VentaRepository extends Repository
             $statement->execute();
         });
     }
-    function delete($id): bool
+
+    function delete(mixed $id): bool
     {
-        return $this->makeTransaction(function($connection) use ($id)
-        {
+        return $this->makeTransaction(function ($connection) use ($id) {
             $query = "delete from $this->table 
                         where codComercial = :codComercial and refProducto = :refProducto and fecha = :fecha";
             $statement = $connection->prepare($query);

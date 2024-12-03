@@ -1,12 +1,17 @@
 <?php
 
+namespace services;
+
+use PDO;
+
 /**
  * Clase Connection, que define como se realiza la conexión con la base de datos y las funciones necesarias para el
  * funcionamiendo de la conexión.
  * @author Selene
  * @version 1.0
  */
-class Connection {
+class Connection
+{
     private string $host;
     private string $db;
     private string $user;
@@ -20,10 +25,10 @@ class Connection {
         $this->db = "ventas_comerciales";
         $this->user = "dam";
         $this->pass = "hlc";
-        $this->dns = "mysql:host=".$this->host.";dbname=".$this->db;
-        $this->connection = new PDO($this->dns,$this->user,$this->pass);
+        $this->dns = "mysql:host=" . $this->host . ";dbname=" . $this->db;
+        $this->connection = new PDO($this->dns, $this->user, $this->pass);
         //ponemos el modo en el que nos podrá lanzar excepciones
-        $this->connection->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+        $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
     /**

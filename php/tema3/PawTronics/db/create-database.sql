@@ -29,4 +29,3 @@ create table if not exists Ventas (
     foreign key (refProducto) references Productos(id) on delete cascade on update cascade
 );
 
-insert into ventas values ('999','PC0001', 8, '2024-12-03 11:18:00');

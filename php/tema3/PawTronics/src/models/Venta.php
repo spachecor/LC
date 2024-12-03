@@ -1,5 +1,10 @@
 <?php
 
+namespace models;
+
+use DateTime;
+use services\DateTimeService;
+
 /**
  * Clase Venta, que modela como será la entidad Venta y su comportamiento
  * @author Selene
@@ -12,10 +17,11 @@ class Venta implements Entity
     private Producto $producto;
     private int $cantidad;
     private DateTime $fecha;
+
     public function __construct(Comercial $comercial, Producto $producto, int $cantidad, DateTime $fecha)
     {
         $this->id = [
-            "codComercial" =>$comercial->getId(),
+            "codComercial" => $comercial->getId(),
             "refProducto" => $producto->getId(),
             "fecha" => DateTimeService::toStringFromDateTime($fecha)
         ];
@@ -56,6 +62,7 @@ class Venta implements Entity
             DateTimeService::toDateTimeFromString($data['fecha'])
         );
     }
+
     public function toArray(): array
     {
         return [

@@ -7,55 +7,39 @@
 </head>
 <body>
 <?php
-require_once ("db/Connection.php");
-require_once("db/repository/Repository.php");
-require_once ("db/repository/ProductoRepository.php");
-require_once ("db/repository/ComercialRepository.php");
-require_once ("db/repository/VentaRepository.php");
-require_once ("models/Entity.php");
-require_once ("models/Producto.php");
-require_once ("models/Comercial.php");
-require_once ("models/Venta.php");
-require_once("services/DateTimeService.php");
 
-//echo "<h1><b>Buscar muchas ventas</b></h1>";
+use models\Producto;
+use models\Comercial;
+use models\Venta;
+use repository\ComercialRepository;
+use repository\ProductoRepository;
+use repository\VentaRepository;
+use services\DateTimeService;
+
+require_once("src/services/Connection.php");
+require_once("src/repository/Repository.php");
+require_once("src/repository/ProductoRepository.php");
+require_once("src/repository/ComercialRepository.php");
+require_once("src/repository/VentaRepository.php");
+require_once ("src/models/Entity.php");
+require_once ("src/models/Producto.php");
+require_once ("src/models/Comercial.php");
+require_once ("src/models/Venta.php");
+require_once("src/services/DateTimeService.php");
+
 $productoRepository = new ProductoRepository();
 $comercialRepository = new ComercialRepository();
 $ventaRepository = new VentaRepository();
-/*$resultadoVentas = $ventaRepository->findAll();
-foreach ($resultadoVentas as $venta) {
-    echo $venta->getProducto()->getNombre()." ";
-    echo $venta->getComercial()->getNombre()."</br>";
-}
-$registroUnico = $ventaRepository->findById(
-        [
-            "codComercial" => "333",
-            "refProducto" => "CC0003",
-            "fecha" => "2014-09-06 13:23:44"
-        ]
-);*/
-//echo "</br>".$registroUnico->getComercial()->getNombre()."</br>";
-$productoEjemplo = $productoRepository->findById("PC0001");
-$comercialEjemplo = $comercialRepository->findById("333");
-/*echo $productoEjemplo->getId()."</br>";
-echo $comercialEjemplo->getId()."</br>";
-$fecha = DateTimeService::toDateTimeFromString("2024-12-03 13:09:00");
-$ventaEjemplo = new Venta($comercialEjemplo, $productoEjemplo, 13, $fecha);
-$hecho = $ventaRepository->insert($ventaEjemplo);
-echo "Por aqui pase";
-echo $hecho;
-$comercialEjemplo->setNombre("Leopoldo Inventado");
-echo $comercialEjemplo->getNombre()."</br>";
-echo $comercialRepository->update("555", $comercialEjemplo);*/
-$ventaEncontrada = $ventaRepository->findById(
-        [
-                "codComercial" => "999",
-                "refProducto" => "PC0001",
-                "fecha" => "2014-01-02 13:23:44"
-        ]
-);
-echo $ventaEncontrada->getCantidad();
-$ventaRepository->delete($ventaEncontrada->getId());
+
+$producto = new Producto('AC0088', "Zapatillas tiburón", "Muy blanditas", 8.95, 10);
+//$productoRepository->insert($producto);
+
+$comercial = new Comercial('123', "Vicente Carrillo", 1800.65, 5, DateTimeService::toDateTimeFromString('1999-12-06 20:23:00'));
+//$comercialRepository->insert($comercial);
+
+$venta = new Venta($comercial, $producto, 5, DateTimeService::toDateTimeFromString('2024-12-03 15:03:15'));
+//$ventaRepository->insert($venta);
+$ventaRepository->delete($venta->getId());
 //LISTA DE PENDIENTES
 //todo agregar el .inc.php en todos los archivos agregables
 ?>

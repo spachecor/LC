@@ -1,5 +1,6 @@
 <?php
 
+namespace models;
 /**
  * Interfaz encargada de modelar el comportamiento de todas las entidades del programa
  * @author Selene

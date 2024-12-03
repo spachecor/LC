@@ -1,5 +1,9 @@
 <?php
 
+namespace services;
+use DateMalformedStringException;
+use DateTime;
+
 /**
  * Clase DateTimeService que se encarga de ayudar en las conversiones de fecha-string y string-fecha
  * @author Selene
