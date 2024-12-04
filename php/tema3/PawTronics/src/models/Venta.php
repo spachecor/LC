@@ -31,6 +31,14 @@ class Venta implements Entity
         $this->fecha = $fecha;
     }
 
+    public static function returnIdArray(string $codComercial, string $refProducto, string $fecha): array{
+        return [
+            "codComercial" => $codComercial,
+            "refProducto" => $refProducto,
+            "fecha" => $fecha
+        ];
+    }
+
     public function getId(): mixed
     {
         return $this->id;
@@ -49,7 +57,7 @@ class Venta implements Entity
                 $data['comercial_nombre'],
                 $data['comercial_salario'],
                 $data['comercial_hijos'],
-                $data['comercial_fNacimiento']
+                DateTimeService::toDateTimeFromString($data['comercial_fNacimiento'])
             ),
             new Producto(
                 $data['producto_id'],

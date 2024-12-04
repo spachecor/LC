@@ -15,6 +15,7 @@ use models\Producto;
 class ProductoRepository extends Repository
 {
     protected string $table = 'productos';
+    protected string $idColumnName = 'referencia';
 
     public function __construct()
     {
@@ -29,5 +30,10 @@ class ProductoRepository extends Repository
     protected function mapRowToEntity(array $row): Entity
     {
         return Producto::fromArray($row);
+    }
+
+    protected function getIdColumnName(): string
+    {
+        return $this->idColumnName;
     }
 }

@@ -28,7 +28,7 @@ class Producto implements Entity
     {
         return new self
         (
-            $data['id'],
+            $data['referencia'],
             $data['nombre'],
             $data['descripcion'],
             (float)$data['precio'],
@@ -40,7 +40,7 @@ class Producto implements Entity
     {
         return
             [
-                'id' => $this->id,
+                'referencia' => $this->id,
                 'nombre' => $this->nombre,
                 'descripcion' => $this->descripcion,
                 'precio' => $this->precio,

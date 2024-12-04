@@ -15,6 +15,7 @@ use models\Entity;
 class ComercialRepository extends Repository
 {
     protected string $table = "comerciales";
+    protected string $idColumnName = "codigo";
 
     public function __construct()
     {
@@ -29,5 +30,10 @@ class ComercialRepository extends Repository
     protected function mapRowToEntity(array $row): Entity
     {
         return Comercial::fromArray($row);
+    }
+
+    protected function getIdColumnName(): string
+    {
+        return $this->idColumnName;
     }
 }

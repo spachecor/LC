@@ -19,7 +19,7 @@ interface Entity
      * @param $id mixed El id de la entidad. Puede ser string o int
      * @return void
      */
-    public function setId($id): void;
+    public function setId(mixed $id): void;
 
     /**
      * Función que convierte una entidad en un array asociativo

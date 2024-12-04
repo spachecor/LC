@@ -30,18 +30,18 @@ class Comercial implements Entity
     public static function fromArray(array $data): self
     {
         return new self(
-            $data['id'],
+            $data['codigo'],
             $data['nombre'],
             $data['salario'],
             $data['hijos'],
-            $data['fNacimiento']
+            DateTimeService::toDateTimeFromString($data['fNacimiento'])
         );
     }
 
     public function toArray(): array
     {
         return [
-            'id' => $this->id,
+            'codigo' => $this->id,
             'nombre' => $this->nombre,
             'salario' => $this->salario,
             'hijos' => $this->hijos,
