@@ -2,7 +2,7 @@ create database if not exists ventas_comerciales;
 
 use ventas_comerciales;
 
-create table IF NOT EXISTS Comerciales (
+create table if NOT EXISTS Comerciales (
 	codigo		varchar(3) primary key,
 	nombre		varchar(30) not null,
 	salario		float not null,
@@ -10,7 +10,7 @@ create table IF NOT EXISTS Comerciales (
 	fNacimiento	datetime not null
 	);
 
-create table IF NOT EXISTS Productos (
+create table if NOT EXISTS Productos (
 	referencia		varchar(6) primary key,
 	nombre		varchar(20) not null,
 	descripcion	varchar(20),
@@ -19,7 +19,7 @@ create table IF NOT EXISTS Productos (
 );
 
 
-create table IF NOT EXISTS Ventas (
+create table if NOT EXISTS Ventas (
 	codComercial	varchar(3),
 	refProducto		varchar(6),
 	cantidad		int,

@@ -1,0 +1,26 @@
+/*NAV*/
+nav{
+    display: flex;
+}
+.logo-mas-marca{
+    display: flex;
+    justify-content: space-around;
+}
+.logo{
+    background-image: url('../img/paw.png');
+    background-size: cover;
+    width: 6rem;
+    height: 6rem;
+}
+.logo:active{
+    background-image: url('../img/paw-pulsada.png');
+}
+.marca{
+    font-family: 'Austie Bost Kitten Klub';
+    font-size: xx-large;
+    font-weight: bold;
+}
+@font-face {
+    font-family: 'Austie Bost Kitten Klub';
+    src: url('../fonts/austie-bost-kitten-klub.regular.ttf');
+}
