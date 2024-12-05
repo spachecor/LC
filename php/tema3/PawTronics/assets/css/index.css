@@ -1,0 +1,124 @@
+/*HEADER*/
+    /*NAV*/
+nav > div > a{
+    text-decoration: none;
+    color: #57423F;
+}
+nav{
+    display: flex;
+    background-color: #ebe6d7;
+    width: 100%;
+}
+.logo-mas-marca{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-right: 1rem;
+    border-right: #b6b1a5 1px solid;
+}
+.logo{
+    background-image: url('../img/paw.png');
+    background-size: cover;
+    width: 6rem;
+    height: 6rem;
+}
+.logo:active{
+    background-image: url('../img/paw-pulsada.png');
+}
+.marca{
+    font-size: xx-large;
+    font-weight: bold;
+}
+.menu-mas-cerrar-sesion{
+    display: flex;
+}
+.pestana{
+    display: flex;
+    align-items: center;
+    font-size: x-large;
+    padding: 0 1rem;
+    height: 100%;
+    transition: all 500ms ease;
+}
+.pestana:hover{
+    background-color: #c4beb1;
+}
+.active{
+    background-color: #c4beb1;
+    border-bottom: #57423F 3px solid;
+}
+
+/*MAIN*/
+    /*BOTON FLOTANTE*/
+.insert-box{
+    display: block;
+    background-image: url('../img/insert.png');
+    background-size: cover;
+    width: 5rem;
+    height: 5rem;
+    cursor: pointer;
+    transition: all 500ms ease;
+}
+.insert-box:active{
+    background-image: url('../img/insert-pulsado.png');
+}
+#btn-insert{
+    display: none;
+}
+.boton-flotante {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+#btn-insert {
+    display: none;
+}
+.opciones a, .insert-box {
+    display: block;
+    text-decoration: none;
+    color: #F3EED9;
+    text-align: center;
+    border-radius: 1rem;
+    transition: all 500ms ease;
+    padding: 0.5rem 1rem;
+}
+.opciones a:hover {
+    background-color: #E19992;
+    color: #57423F;
+}
+.opciones a {
+    margin-bottom: -15px;
+    opacity: 0;
+    visibility: hidden;
+    background-color: #57423F;
+}
+#btn-insert:checked ~ .opciones a {
+    margin-bottom: 10px;
+    opacity: 1;
+    visibility: visible;
+}
+#btn-insert:checked ~ .insert-box {
+    background-image: url('../img/insert-pulsado.png');
+}
+    /*CONTENIDO MAIN*/
+.contenido-main{
+    background-color: white;
+    margin: 2rem 4rem;
+    padding: 0.5rem 0.5rem;
+    border-radius: 1rem;
+}
+/*FOOTER*/
+footer {
+    text-align: center;
+    padding: 10px 0;
+    font-size: medium;
+}
+footer hr {
+    border: none;
+    border-top: 1px solid #57423f7e;
+    margin: 0 auto;
+    width: 80%;
+}
+footer p {
+    margin: 10px 0 0;
+}
