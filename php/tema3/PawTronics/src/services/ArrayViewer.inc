@@ -1,5 +1,10 @@
 <?php
 namespace services;
+/**
+ * Clase auxiliar que contiene una función para ayudar a la legibilidad de un array
+ * @author Selene
+ * @version 1.0
+ */
 class ArrayViewer{
     /**
      * Función que recibe un array y que devuelve este array convertido en una cadena separando los valores por comas

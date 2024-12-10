@@ -2,13 +2,13 @@
 
 namespace repository;
 
-use http\Exception\RuntimeException;
+use \RuntimeException;
 use models\Entity;
 use PDO;
 use PDOException;
 use services\Connection;
 
-require_once "src/services/Connection.php";
+require_once "src/services/Connection.inc";
 
 /**
  * Clase abstracta Repository, que maneja el CRUD de las entidades con la base de datos

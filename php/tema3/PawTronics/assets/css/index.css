@@ -47,7 +47,9 @@ nav{
     background-color: #c4beb1;
     border-bottom: #57423F 3px solid;
 }
-
+.insercion{
+    border-left: #b6b1a5 1px solid;
+}
 /*MAIN*/
     /*BOTON FLOTANTE*/
 .insert-box{
@@ -106,6 +108,24 @@ nav{
     margin: 2rem 4rem;
     padding: 0.5rem 0.5rem;
     border-radius: 1rem;
+}
+.eliminar{
+    background-image: url('../img/eliminar.png');
+    background-color: #F3EED9;
+    width: 30px;
+    height: 30px;
+}
+.eliminar:active{
+    background-color: #E19992;
+}
+.modificar{
+    background-image: url('../img/modificar.png');
+    background-color: #F3EED9;
+    width: 30px;
+    height: 30px;
+}
+.modificar:active{
+    background-color: #E19992;
 }
 /*FOOTER*/
 footer {

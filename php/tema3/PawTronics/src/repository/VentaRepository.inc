@@ -11,7 +11,7 @@ use Services\ArrayViewer;
 use services\Connection;
 use services\DateTimeService;
 
-require_once "src/services/Connection.php";
+require_once "src/services/Connection.inc";
 require_once "src/models/Entity.php";
 
 /**
@@ -97,6 +97,78 @@ class VentaRepository extends Repository
             return null;
         }catch (PDOException $e){
             throw new RuntimeException("Error en la búsqueda de la entidad con id: ".ArrayViewer::walker($id)." de la tabla ".
+                $this->table." por: ".$e->getMessage());
+        }
+    }
+
+    /**
+     * Función que busca y encuentra todos los registros de ventas de un comercial concreto
+     * @param mixed $idComercial El id del comercial
+     * @return array El array de entidades Venta encontradas
+     */
+    public function findComercialInVentas(mixed $idComercial): array{
+        try{
+            $connectionObject = new Connection();
+            $connection = $connectionObject->getConnection();
+            $query = "select c.codigo as comercial_id, c.nombre as comercial_nombre, c.salario as comercial_salario,
+            c.hijos as comercial_hijos, c.fNacimiento as comercial_fNacimiento, p.referencia as producto_id, 
+            p.nombre as producto_nombre, p.descripcion as producto_descripcion, p.precio as producto_precio, 
+            p.descuento as producto_descuento, v.cantidad, v.fecha
+            from comerciales c
+            inner join $this->table v
+            on c.codigo = v.codComercial
+            inner join productos p
+            on p.referencia = v.refProducto
+            where c.codigo = :codComercial;";
+            $statement = $connection->prepare($query);
+            $statement->bindParam(":codComercial", $idComercial);
+            $statement->execute();
+            $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+            $entities = [];
+            $entityClass = $this->getEntityClass();
+            foreach ($results as $row) {
+                $entities[] = $entityClass::fromArray($row);
+            }
+            $connectionObject->__destruct();
+            return $entities;
+        }catch (PDOException $e){
+            throw new RuntimeException("Error en la búsqueda de todas las entidades de la tabla ".
+                $this->table." por: ".$e->getMessage());
+        }
+    }
+
+    /**
+     * Función que busca y encuentra todos los registros de ventas de un producto concreto
+     * @param mixed $idProducto El id del producto
+     * @return array El array de entidades Venta encontradas
+     */
+    public function findProductoInVentas(mixed $idProducto): array{
+        try{
+            $connectionObject = new Connection();
+            $connection = $connectionObject->getConnection();
+            $query = "select c.codigo as comercial_id, c.nombre as comercial_nombre, c.salario as comercial_salario,
+            c.hijos as comercial_hijos, c.fNacimiento as comercial_fNacimiento, p.referencia as producto_id, 
+            p.nombre as producto_nombre, p.descripcion as producto_descripcion, p.precio as producto_precio, 
+            p.descuento as producto_descuento, v.cantidad, v.fecha
+            from comerciales c
+            inner join $this->table v
+            on c.codigo = v.codComercial
+            inner join productos p
+            on p.referencia = v.refProducto
+            where p.referencia = :refProducto;";
+            $statement = $connection->prepare($query);
+            $statement->bindParam(":refProducto", $idProducto);
+            $statement->execute();
+            $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+            $entities = [];
+            $entityClass = $this->getEntityClass();
+            foreach ($results as $row) {
+                $entities[] = $entityClass::fromArray($row);
+            }
+            $connectionObject->__destruct();
+            return $entities;
+        }catch (PDOException $e){
+            throw new RuntimeException("Error en la búsqueda de todas las entidades de la tabla ".
                 $this->table." por: ".$e->getMessage());
         }
     }

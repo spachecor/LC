@@ -1,4 +1,0 @@
-Colores:
-#E19992 - Rosita (predominante)
-#57423F - Marron (secundario)
-#F3EED9 - Clarito (fondo)

@@ -5,6 +5,11 @@ body{
     background-color: #F3EED9;
     color: #57423F;
 }
+.error{
+    color: rgb(129, 0, 0);
+    font-weight: bold;
+    text-align: center;
+}
 @font-face {
     font-family: 'Austie Bost Kitten Klub';
     src: url('../fonts/austie-bost-kitten-klub.regular.ttf');

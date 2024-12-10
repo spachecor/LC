@@ -3,3 +3,22 @@
     padding: 1rem 2rem;
     border-radius: 1rem;
 }
+.fila{
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+}
+input{
+    height: 50px;
+    padding: 0 15px;
+    border-radius: 1rem;
+    border: #b6b1a5 1px solid;
+    margin-top: 5px;
+}
+select{
+    height: 50px;
+    padding: 0 15px;
+    border-radius: 1rem;
+    border: #b6b1a5 1px solid;
+    margin-top: 5px;
+}

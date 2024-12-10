@@ -18,7 +18,7 @@ class DateTimeService
      */
     public static function toStringFromDateTime(DateTime $dateTime): string
     {
-        return $dateTime->format('Y-m-d H:i:s');
+        return $dateTime->format('Y-m-d');
     }
 
     /**

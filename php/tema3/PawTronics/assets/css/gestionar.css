@@ -3,3 +3,30 @@
     padding: 1rem 2rem;
     border-radius: 1rem;
 }
+h1{
+    text-align: center;
+}
+table{
+    width: 100%;
+}
+td{
+    text-align: center;
+    border-right: #b6b1a5 1px solid;
+    border-left: #b6b1a5 1px solid;
+    padding: 10px 0;
+}
+th{
+    padding-bottom: 10px;
+    font-size: larger;
+}
+.borde-superior{
+    border-top: #b6b1a5 1px solid;
+    border-radius: 1rem 1rem 0 0;
+}
+.borde-inferior{
+    border-bottom: #b6b1a5 1px solid;
+    border-radius: 0 0 1rem 1rem;
+}
+.filtrado{
+    margin: 20px 0;
+}
