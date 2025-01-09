@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\DamController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,18 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('DAM', function(){
-    return "Estás en 2º DAM, en Lenguajes de Contacto";
-});
-Route::get('DAM/HLCProfesor', function(){
-    return "LENGUAJES DE CONTACTO Y YA";
-});
-Route::get('DAM/{modulo}', function($modulo){
-    return "Hola crack, bienvenido al módulo: $modulo";
-});
-Route::get('DAM/{modulo}/{alumno}/{nota?}', function($modulo, $alumno, $nota=null){
-    return "Hola $alumno, bienvenido al módulo: $modulo. ".(($nota==null)?'Aún no han puesto tu nota.':"Tu nota es de: $nota");
-});
+Route::get('/', HomeController::class);
+Route::get('DAM', [DamController::class, 'index']);
+Route::get('DAM/HLCProfesor', [DamController::class, 'profesor']);
+Route::get('DAM/{modulo}', [DamController::class, 'modulo']);
+Route::get('DAM/{modulo}/{alumno}/{nota?}', [DamController::class, 'notas']);
