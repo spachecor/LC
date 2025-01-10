@@ -15,8 +15,8 @@ use App\Http\Controllers\DamController;
 |
 */
 
-Route::get('/', HomeController::class);
-Route::get('DAM', [DamController::class, 'index']);
-Route::get('DAM/HLCProfesor', [DamController::class, 'profesor']);
-Route::get('DAM/{modulo}', [DamController::class, 'modulo']);
-Route::get('DAM/{modulo}/{alumno}/{nota?}', [DamController::class, 'notas']);
+Route::get('/', HomeController::class)->name('home');
+Route::get('DAM', [DamController::class, 'index'])->name('index');
+Route::get('DAM/HLCProfesor', [DamController::class, 'profesor'])->name('profesor');
+Route::get('DAM/{modulo}', [DamController::class, 'modulo'])->name('modulo');
+Route::get('DAM/{modulo}/{alumno}/{nota?}', [DamController::class, 'notas'])->name('notas');

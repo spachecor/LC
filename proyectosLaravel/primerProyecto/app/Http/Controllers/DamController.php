@@ -7,15 +7,19 @@ use Illuminate\Http\Request;
 class DamController extends Controller
 {
     function index(){
-        return "Estás en 2º DAM, en Lenguajes de Contacto";
+        return view('2DAW.daw');
     }
     function profesor(){
-        return "LENGUAJES DE CONTACTO Y YA";
+        return view('2DAW.profesor');
     }
     function modulo($modulo){
-        return "Hola crack, bienvenido al módulo: $modulo";
+        return view('2DAW.modulo', ['modulo'=>$modulo]);
     }
     function notas($modulo, $alumno, $nota=null){
-        return "Hola $alumno, bienvenido al módulo: $modulo. ".(($nota==null)?'Aún no han puesto tu nota.':"Tu nota es de: $nota");
+        return view('2DAW.alumno', [
+            'modulo'=>$modulo,
+            'alumno'=>$alumno,
+            'nota'=>$nota
+            ]);
     }
 }
