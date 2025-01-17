@@ -12,9 +12,9 @@ class DamController extends Controller
     function profesor(){
         return view('2DAW.profesor');
     }
-    function modulo($modulo){
+    function modulo($modulo = null){
         return view('2DAW.modulo', ['modulo'=>$modulo]);
-    }
+    }    
     function notas($modulo, $alumno, $nota=null){
         return view('2DAW.alumno', [
             'modulo'=>$modulo,
