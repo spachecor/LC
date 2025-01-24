@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('miapp', function (Blueprint $table) {
+        /*Schema::table('miapp', function (Blueprint $table) {
             $table->string('existencias')->nullable();
-        });
+        });*/
     }
 
     /**
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('miapp', function (Blueprint $table) {
+        /*Schema::table('miapp', function (Blueprint $table) {
             $table->dropColumn('existencias');
-        });
+        });*/
     }
 };
