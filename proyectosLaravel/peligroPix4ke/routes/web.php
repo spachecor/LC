@@ -15,10 +15,12 @@ use App\Http\Controllers\LibrosController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+/*->name('nombre') es el nombre simbolico para ir a esa ruta desde uno de mis html*/
 Route::get('/', HomeController::class)->name('home');
 Route::get('DAM', [DamController::class, 'index'])->name('index');
 Route::get('DAM/HLCProfesor', [DamController::class, 'profesor'])->name('profesor');
 Route::get('DAM/libros', [LibrosController::class, 'index'])->name('libros');
+Route::get("DAM/libros/{libro}", [LibrosController::class, 'libroEnlazado'])->name('libroEnlazado');
+Route::get('DAM/libros/libro/{titulo}', [LibrosController::class, 'libro'])->name('libro');
 Route::get('DAM/{modulo?}', [DamController::class, 'modulo'])->name('modulo');
 Route::get('DAM/{modulo}/{alumno}/{nota?}', [DamController::class, 'notas'])->name('notas');
