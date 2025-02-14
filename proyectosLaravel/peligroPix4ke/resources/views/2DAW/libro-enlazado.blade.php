@@ -10,4 +10,5 @@
 <p>Editorial: {{$libro->editorial}}</p>
 <p>ISBN: {{$libro->isbn}}</p>
 <p>Precio: {{$libro->pvp}}€</p>
+<a href="{{route('editar', $libro)}}">Editar Libro</a>
 @endsection

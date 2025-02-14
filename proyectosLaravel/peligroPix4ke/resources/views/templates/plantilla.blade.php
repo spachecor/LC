@@ -11,7 +11,11 @@
             <li><a href="{{route('home')}}">Home</a></li>
             <li><a href="{{ route('modulo') }}">Módulo</a></li>
             <li><a href="{{route('profesor')}}">Profesor</a></li>
-            <li><a href="{{route('libros')}}">Libros</a></li>
+            <li><a href="{{route('libros')}}">Libros</a>
+                <ul>
+                    <li><a href="{{route('crear')}}">Agregar nuevo libro</a></li>
+                </ul>
+            </li>
         </ul>
     </nav>
     @yield('contenido')
