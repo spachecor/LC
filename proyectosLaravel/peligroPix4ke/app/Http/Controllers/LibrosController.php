@@ -57,4 +57,8 @@ class LibrosController extends Controller
     
         return redirect()->route('libroEnlazado', $libro);
     }
+    public function eliminar(Libro $libro){
+        $libro->delete();
+        return redirect()->route('libros');
+    }
 }

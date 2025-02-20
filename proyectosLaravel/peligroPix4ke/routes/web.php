@@ -24,6 +24,7 @@ Route::post('DAM/libros', [LibrosController::class, 'agregar'])->name('agregar')
 Route::get("DAM/libros/crear", [LibrosController::class, 'crear'])->name('crear');
 Route::get("DAM/libros/{libro}", [LibrosController::class, 'libroEnlazado'])->name('libroEnlazado');
 Route::put('DAM/libros/{libro}',[LibrosController::class,'actualizar'])->name('actualizar');
+Route::delete("DAM/libros/{libro}", [LibrosController::class, 'eliminar'])->name('eliminar');
 Route::get("DAM/libros/{libro}/editar", [LibrosController::class, 'editar'])->name('editar');
 Route::get('DAM/libros/libro/{titulo}', [LibrosController::class, 'libro'])->name('libro');
 Route::get('DAM/{modulo?}', [DamController::class, 'modulo'])->name('modulo');
