@@ -26,6 +26,10 @@
             <option value="Desarollo Personal">Desarollo Personal</option>
         </select>
         <br><br>
+        @auth
         <button type="submit">Agregar Libro</button>
+        @else
+        <p>Para enviar el formulario, registrate <a href="{{route('login')}}"><b>PUTO</b></a></p>
+        @endauth
     </form>
 @endsection
